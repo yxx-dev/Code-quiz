@@ -23,23 +23,37 @@ let elemAllOptBtn = document.querySelector(".btn2");
 let elemRightWrong = document.querySelector(".rightwrong");
 let elemTimer = document.querySelector(".timer")
 
+//scores
+let yourScores;
+let mainI;
+function resetScoresI () {
+    yourScores = 100; //reset score
+    mainI = 0; //reset iteration
+}
+
 //global timer
-let timeLeft = 30;
-let countdown = 0;
+let timeLeft;
+let countdown;
+let timerInterval;
 function timer() {
-    let timeInterval = setInterval(funCount, 1000);
+    timerInterval = setInterval(funCount, 1000);
     function funCount () {   
         if (countdown === timeLeft) {
-            clearInterval(timeInterval);
+            clearInterval(timerInterval);
+            mainI=0;
             showSubmit();
         } else {
             countdown++
             console.log(timeLeft, countdown); //timer test
         }
     }
-}
+};
+function resetTimer() {
+    timeLeft = 30;
+    countdown = 0;
+};
 
-//initial load
+//load intro
 document.addEventListener("DOMContentLoaded",showIntro);
 function showIntro () {
     //console.log("showIntro is working");
@@ -48,10 +62,17 @@ function showIntro () {
     main.style.display = "none";
     submit.style.display = "none";
     highScores.style.display = "none";
+    resetScoresI();
 };
 
+//view high score button
 const viewHighScore = document.querySelector(".scores");
 viewHighScore.addEventListener("click",showHighScores);
+
+
+//start quiz
+let startQuiz = document.querySelector(".btn1");
+startQuiz.addEventListener("click", showMain);
 
 //load main
 function showMain () {
@@ -69,17 +90,15 @@ function showMain () {
     elemBtn4.textContent = quizOption4[0];
     elemRightWrong.textContent = ""; 
 
+    //reset timer
+    resetTimer();
     //timer control
     elemTimer.textContent = `Time left: ${timeLeft}s`;
     timer();
-    console.log(timeLeft, countdown);
-
 };
 
 //check answers and next
 
-let yourScores = 100;
-let mainI = 0;
 main.addEventListener("click",proceed);
 function proceed (event) {
     let element = event.target;
@@ -87,33 +106,36 @@ function proceed (event) {
     if (element.dataset.id === quizAnswer[mainI]) {
         console.log("correct", yourScores);
         elemRightWrong.textContent = "Correct!"; 
+        countdown = 0;
     } else if (!isNaN(element.dataset.id)) {
         console.log("wrong", yourScores);
         yourScores =- 10;
         elemRightWrong.textContent = "Wrong!"; 
+        timeLeft = timeLeft - countdown;
+        countdown = 0;
     };
-mainI++;
-//ADD timer check
-if (mainI === quizQuestions.length) {
-    showSubmit();
-    mainI=0;
-} else {
-    elemQuestion.textContent = quizQuestions[mainI];
-    elemBtn1.textContent = quizOption1[mainI];
-    elemBtn2.textContent = quizOption2[mainI];
-    elemBtn3.textContent = quizOption3[mainI];
-    elemBtn4.textContent = quizOption4[mainI];
-};
-
-
-
+    if (!isNaN(element.dataset.id)) {
+        mainI++;
+        if (mainI === quizQuestions.length) {
+        showSubmit();
+        mainI=0;
+        } else {
+            elemQuestion.textContent = quizQuestions[mainI];
+            elemBtn1.textContent = quizOption1[mainI];
+            elemBtn2.textContent = quizOption2[mainI];
+            elemBtn3.textContent = quizOption3[mainI];
+            elemBtn4.textContent = quizOption4[mainI];
+            timer();
+            };
+    }
 };
 
 
 //load submit
 function showSubmit () {
     //console.log("showSubmit is working");
-    timeLeft = 30; //ensure the same as initial setup
+    clearInterval(timerInterval); // stop timer if still time left
+    resetTimer(); //reset timer
     header.style.display = "none";
     intro.style.display = "none";
     main.style.display = "none";
@@ -136,16 +158,8 @@ function showHighScores () {
 
 const goBack = document.querySelector("#back");
 //TODO need to navigate to the previous page
-goBack.addEventListener("click",showMain);
+goBack.addEventListener("click",showIntro);
 const clear = document.querySelector("#clear");
 //clear.addEventListener("click",)
 
-//start quiz
-let startQuiz = document.querySelector(".btn1");
-startQuiz.addEventListener("click", showMain);
 
-
-
-let title = document.querySelector(".question");
-let subtitle = document.querySelector(".subtitle");
-//let btn
