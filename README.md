@@ -15,8 +15,7 @@ Screenshot: <br />
 ![alt text](/assets/images/Screenshot.png)
 
 ## Credits
-Updated from starter code:
-https://github.com/coding-boot-camp/friendly-parakeet
+Developed from scratch
 
 ## License
 NA
