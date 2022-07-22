@@ -1,0 +1,38 @@
+body {
+    width: 1280px;
+    margin: 3vh auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    height: 5em;
+}
+
+.scores {
+    color: purple;
+
+}
+
+a:link {
+    color: inherit;
+    text-decoration: inherit;
+}
+a:visited {
+    color: inherit;
+    text-decoration: inherit;
+}
+a:hover, a:focus {
+    color: rgb(15, 155, 211);
+    text-decoration: inherit;
+}
+a:active {
+    color: darkgrey;
+    text-decoration: inherit;
+}
+
+.timer {
+
+}
+
