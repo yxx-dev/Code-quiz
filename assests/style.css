@@ -1,5 +1,5 @@
 body {
-    width: 1280px;
+    width: 960px;
     margin: 3vh auto;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -13,6 +13,18 @@ header {
 .scores {
     color: purple;
 
+}
+
+h1 {
+    font-size:4em;
+}
+
+h2 {
+    font-size:2em;
+    font-weight: normal;
+    font-style: italic;
+    color: grey;
+    text-decoration: underline;
 }
 
 a:link {
@@ -36,3 +48,29 @@ a:active {
 
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+main * {
+    margin: 0.5em 0;
+}
+
+button {
+    min-width: 150px;
+    height: 2em;
+    color: white;
+    font-size: 1.2em;
+    border-radius: 5px;
+    background-color: purple;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+    background-color: rgb(15, 155, 211);
+}
