@@ -16,7 +16,7 @@ header {
 }
 
 h1 {
-    font-size:4em;
+    font-size:3em;
 }
 
 h2 {
@@ -48,14 +48,38 @@ a:active {
 
 }
 
-main {
+.intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.intro * {
+    margin: 15px 0;
+}
+
+main, .submit, .highscores {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-main * {
+main *, .submit *, .highscores * {
     margin: 0.5em 0;
+}
+
+#submitbuttons, #highscorebuttons {
+    display: flex;
+    align-items: center;
+}
+
+#submitbuttons *, #highscorebuttons * {
+    margin-right: 1.5em;
+}
+
+.records {
+    background-color: rgb(197, 156, 197);
+    color: green;
 }
 
 button {
@@ -73,4 +97,9 @@ button:hover {
 
 button:active {
     background-color: rgb(15, 155, 211);
+}
+
+.rightwrong {
+    border-top: 1px solid grey;
+    padding-top: 0px;
 }

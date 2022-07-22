@@ -13,15 +13,37 @@
         <nav class="scores"><a href="#">View High Scores</a></nav>
         <section class="timer"></section>
     </header>
-    <main>
-        <section class="question" data-state="hide"><h1>question</h1></section>
-        <button class="btn2" ID="opt1" data-state="hide">btn1</button>
-        <button class="btn2" ID="opt2" data-state="hide">btn2</button>
-        <button class="btn2" ID="opt3" data-state="hide">btn3</button>
-        <button class="btn2" ID="opt4" data-state="hide">btn4</button>
+    <section class="intro" data-state="show">
+        <article><h1>Yilun's Coding Quiz Challenge</h1></article>
+        <subtitle>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</subtitle>
+        <button class="btn1">Start Quiz</button>
+    </section>
+    <main class="main" data-state="hide">
+        <article class="question"><h1>Question</h1></article>
+        <subtitle class="subtitle"></subtitle>
+        <button class="btn2" ID="opt1">btn1</button>
+        <button class="btn2" ID="opt2">btn2</button>
+        <button class="btn2" ID="opt3">btn3</button>
+        <button class="btn2" ID="opt4">btn4</button>
         <section class="rightwrong" data-state="hide"><h2>check</h2></section>
     </main>
-
+    <section class="submit" data-state="hide">
+        <article class="score"><h1>All done!</h1></article>
+        <section id="submitbuttons">
+            <article>Enter Initial: </article>
+            <textarea class="initials" rows="1" columns="4"></textarea>
+            <button class="btn3">Submit</button>
+        </section>
+        <section class="rightwrong" data-state="hide"><h2>check</h2></section>
+    </section>
+    <section class="highscores" data-state="hide">
+        <article><h1>High Scores</h1></article>
+        <textarea class="records" rows="1"></textarea>
+        <section id="highscorebuttons">
+            <button class="btn3" id="back">Go Back</button>
+            <button class="btn3" id="clear">Clear High Scores</button>
+        </section>
+    </section>
     <script src="./assests/script.js"></script>
 </body>
 </html>
