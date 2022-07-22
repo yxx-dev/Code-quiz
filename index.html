@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="scores"><a href="#">View High Scores</a></nav>
+        <nav class="scores">View High Scores</nav>
         <section class="timer"></section>
     </header>
     <section class="intro" data-state="show">
@@ -19,13 +19,13 @@
         <button class="btn1">Start Quiz</button>
     </section>
     <main class="main" data-state="hide">
-        <article class="question"><h1>Question</h1></article>
+        <article class="question"></article>
         <subtitle class="subtitle"></subtitle>
-        <button class="btn2" ID="opt1">btn1</button>
-        <button class="btn2" ID="opt2">btn2</button>
-        <button class="btn2" ID="opt3">btn3</button>
-        <button class="btn2" ID="opt4">btn4</button>
-        <section class="rightwrong" data-state="hide"><h2>check</h2></section>
+        <button class="btn2" id="opt1" data-id="1"></button>
+        <button class="btn2" id="opt2" data-id="2"></button>
+        <button class="btn2" id="opt3" data-id="3"></button>
+        <button class="btn2" id="opt4" data-id="4"></button>
+        <section class="rightwrong" data-state="hide">check</section>
     </main>
     <section class="submit" data-state="hide">
         <article class="score"><h1>All done!</h1></article>
@@ -34,7 +34,7 @@
             <textarea class="initials" rows="1" columns="4"></textarea>
             <button class="btn3">Submit</button>
         </section>
-        <section class="rightwrong" data-state="hide"><h2>check</h2></section>
+        <section class="rightwrong" id="submit-rightwrong" data-state="hide"></section>
     </section>
     <section class="highscores" data-state="hide">
         <article><h1>High Scores</h1></article>

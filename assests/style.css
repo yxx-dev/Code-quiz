@@ -1,11 +1,12 @@
 body {
-    width: 960px;
+    width: 800px;
     margin: 3vh auto;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 header {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     height: 5em;
 }
@@ -15,11 +16,12 @@ header {
 
 }
 
-h1 {
+h1, .question {
     font-size:3em;
+    font-weight: bold;
 }
 
-h2 {
+h2, .rightwrong {
     font-size:2em;
     font-weight: normal;
     font-style: italic;
@@ -27,19 +29,20 @@ h2 {
     text-decoration: underline;
 }
 
-a:link {
+nav:link {
     color: inherit;
     text-decoration: inherit;
 }
-a:visited {
+nav:visited {
     color: inherit;
     text-decoration: inherit;
 }
-a:hover, a:focus {
+nav:hover, nav:focus {
     color: rgb(15, 155, 211);
     text-decoration: inherit;
+    cursor: pointer;
 }
-a:active {
+nav:active {
     color: darkgrey;
     text-decoration: inherit;
 }
@@ -99,7 +102,13 @@ button:active {
     background-color: rgb(15, 155, 211);
 }
 
+.btn2 {
+    width: 15em;
+    padding: 0 1em;
+    text-align: left;
+}
+
 .rightwrong {
-    border-top: 1px solid grey;
+    /*border-top: 1px solid grey;*/
     padding-top: 0px;
 }
