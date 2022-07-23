@@ -6,7 +6,7 @@ let highScores = document.querySelector(".highscores");
 let header = document.querySelector("header");
 
 //store Q&As
-const quizQuestions = ['Commonly used data types DO Not include:', 'Arrays in JavaScript can be used to store:', 'String values must be enclosed within _____ when being assigned to variables', 'The condition in an if / else statement is enclosed with ______', 'A very useful tool used during development and debugging for printing content to the debugger is:'];
+const quizQuestions = ['Commonly used data types DO Not include:', 'Arrays in JavaScript can be used to store:', 'String values must be enclosed within _____ when being assigned to variables:', 'The condition in an if / else statement is enclosed with ______:', 'A very useful tool used during development and debugging for printing content to the debugger is:'];
 const quizOption1 = ['1. strings', '1. numbers and string', '1. commas', '1. quotes', '1. JavaScript'];
 const quizOption2 = ['2. booleans', '2. other arrays', '2. curly brackets', '2. curly brackets', '2. terminal/bash'];
 const quizOption3 = ['3. alerts', '3. booleans', '3. quotes', '3. parenthesis', '3. for loops'];
@@ -30,11 +30,11 @@ let initials;
 let scoreBoard = document.querySelector(".records");
 function resetScoresI () {
     yourScores = 100; //reset score
-    initials = ""; //reset initials
+    //initials = ""; //reset initials
     mainI = 0; //reset iteration
 }
 let recordScore = [];
-let recordName = [];
+//let recordName = [];
 let recordNumber = 0;
 
 //global timer
@@ -157,25 +157,18 @@ function showSubmit () {
     highScores.style.display = "none";
     document.querySelector(".finalScore").textContent = `Your final score is ${yourScores}`;
     document.getElementById("submit-rightwrong").textContent = elemRightWrong.textContent;
-    console.log(recordNumber, recordName, recordScore);
-
-    document.querySelector(".btn3").addEventListener("click", writeRecord);
-    function writeRecord (event) {
+    document.getElementById("btn3-submit").addEventListener("click", writeRecord);
+    function writeRecord () {
+        console.log(recordNumber, recordScore);
         //console.log(`initials is ${initials.value}`);
-        event.preventDefault();
-        event.stopPropagation();
-        //console.log(recordNumber, recordName, recordScore);
+        //event.preventDefault();
+        //event.stopPropagation();
         initials = document.querySelector(".initials").value;
-        recordName.push(initials);
+        recordScore.push(`${initials}, ${yourScores}`);
         document.querySelector(".initials").value = "";
-        recordScore.push(yourScores);
         recordNumber += 1;
-        //console.log(recordNumber, recordName, recordScore);
-        //yourScores = 0;
-        //initials.value = "";
-        //console.log(`initials is ${initials.value}`);
         showHighScores();
-        //console.log(recordNumber, recordName, recordScore);
+        console.log(recordNumber, recordScore);
     };
 };
 
@@ -195,13 +188,14 @@ function showHighScores () {
     //console.log(recordNumber, recordName, recordScore);
     //scoreBoard.value += recordName[recordNumber - 1] + ", " + recordScore[recordNumber - 1] + "\n";
     for (i=0; i<recordNumber; i++) {
+        console.log(recordNumber, recordScore);
         //scoreBoard.value = "test"; //recordName[i] + "," + recordScore[i]; 
         console.log(i);
-        console.log(recordNumber, recordName, recordScore);
-        scoreBoard.value += recordName[i] + ", " + recordScore[i] + "\n";
+        console.log(recordNumber, recordScore);
+        scoreBoard.value += recordScore[i] + "\n";
+        console.log(recordNumber, recordScore);
     };
-    
-
+    console.log(recordNumber, recordScore);
 };
 
 //go back from highscore
@@ -210,11 +204,9 @@ goBack.addEventListener("click",showIntro);
 let clear = document.querySelector("#clear");
 clear.addEventListener("click",clearScores);
 function clearScores () {
-recordNumber = 0;
-recordName =[];
-recordScore = [];
-scoreBoard.value = "";
-console.log(recordNumber, recordName, recordScore);
+    recordNumber = 0;
+    recordScore = [];
+    scoreBoard.value = "";
 };
 
 
