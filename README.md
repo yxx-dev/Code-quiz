@@ -1,7 +1,7 @@
 # Code Quiz
 
 ## Description
-A code quiz with a count down timer that also shows and logs correct/incorrect answers. It also allows retry and records the highest score. Deployment: XX
+A code quiz with a count down timer that also shows and logs correct/incorrect answers. It also allows retry and records the highest score. Deployment: https://yxx-dev.github.io/Code-quiz/
 
 ## Table of Contents (Optional)
 NA

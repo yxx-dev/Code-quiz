@@ -157,21 +157,26 @@ function showSubmit () {
     highScores.style.display = "none";
     document.querySelector(".finalScore").textContent = `Your final score is ${yourScores}`;
     document.getElementById("submit-rightwrong").textContent = elemRightWrong.textContent;
+    console.log(recordNumber, recordName, recordScore);
+
     document.querySelector(".btn3").addEventListener("click", writeRecord);
     function writeRecord (event) {
         //console.log(`initials is ${initials.value}`);
         event.preventDefault();
         event.stopPropagation();
+        //console.log(recordNumber, recordName, recordScore);
         initials = document.querySelector(".initials").value;
-        recordName[recordNumber] = initials;
-        //document.querySelector(".initials").value = "";
-        recordScore[recordNumber] = yourScores;
-        recordNumber++;
+        recordName.push(initials);
+        document.querySelector(".initials").value = "";
+        recordScore.push(yourScores);
+        recordNumber += 1;
+        //console.log(recordNumber, recordName, recordScore);
         //yourScores = 0;
         //initials.value = "";
         //console.log(`initials is ${initials.value}`);
         showHighScores();
-    }
+        //console.log(recordNumber, recordName, recordScore);
+    };
 };
 
 //load highScores
@@ -186,17 +191,15 @@ function showHighScores () {
     submit.style.display = "none";
     highScores.style.display = "flex";
     scoreBoard.setAttribute("rows", recordNumber);
-    console.log(recordNumber);
-    scoreBoard.value += recordName[recordNumber - 1] + ", " + recordScore[recordNumber - 1] + "\n";
-    /*for (i=0; i<recordNumber; i++) {
+    scoreBoard.value = "";
+    //console.log(recordNumber, recordName, recordScore);
+    //scoreBoard.value += recordName[recordNumber - 1] + ", " + recordScore[recordNumber - 1] + "\n";
+    for (i=0; i<recordNumber; i++) {
         //scoreBoard.value = "test"; //recordName[i] + "," + recordScore[i]; 
         console.log(i);
-        //console.log(`${recordName[i]}, ${recordScore[i]}, ${i}`);
-        scoreBoard.value += recordName[i] + ", " + recordScore[i];
-        /*if (i<recordScore.length) {
-            scoreBoard.value += "\n";
-        };
-    };*/
+        console.log(recordNumber, recordName, recordScore);
+        scoreBoard.value += recordName[i] + ", " + recordScore[i] + "\n";
+    };
     
 
 };
@@ -205,6 +208,13 @@ function showHighScores () {
 let goBack = document.querySelector("#back");
 goBack.addEventListener("click",showIntro);
 let clear = document.querySelector("#clear");
-//clear.addEventListener("click",)
+clear.addEventListener("click",clearScores);
+function clearScores () {
+recordNumber = 0;
+recordName =[];
+recordScore = [];
+scoreBoard.value = "";
+console.log(recordNumber, recordName, recordScore);
+};
 
 
