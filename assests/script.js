@@ -26,14 +26,21 @@ let elemTimer = document.querySelector(".timer")
 //scores
 let yourScores;
 let mainI;
+let initials;
+let scoreBoard = document.querySelector(".records");
 function resetScoresI () {
     yourScores = 100; //reset score
+    initials = ""; //reset initials
     mainI = 0; //reset iteration
 }
+let recordScore = [];
+let recordName = [];
+let recordNumber = 0;
 
 //global timer
 let timeLeft;
 let countdown;
+let timeDisplay;
 let timerInterval;
 function timer() {
     timerInterval = setInterval(funCount, 1000);
@@ -43,20 +50,25 @@ function timer() {
             mainI=0;
             showSubmit();
         } else {
-            countdown++
+            countdown++;
+            timeDisplay = timeLeft - countdown;
+            elemTimer.textContent = `Time left: ${timeDisplay}s`;
             console.log(timeLeft, countdown); //timer test
         }
     }
 };
 function resetTimer() {
     timeLeft = 30;
+    timeDisplay = timeLeft;
     countdown = 0;
 };
 
 //load intro
 document.addEventListener("DOMContentLoaded",showIntro);
-function showIntro () {
+function showIntro (event) {
     //console.log("showIntro is working");
+    event.preventDefault();
+    event.stopPropagation();
     header.style.display = "none";
     intro.style.display = "flex";
     main.style.display = "none";
@@ -66,7 +78,7 @@ function showIntro () {
 };
 
 //view high score button
-const viewHighScore = document.querySelector(".scores");
+let viewHighScore = document.querySelector(".scores");
 viewHighScore.addEventListener("click",showHighScores);
 
 
@@ -77,6 +89,7 @@ startQuiz.addEventListener("click", showMain);
 //load main
 function showMain () {
     //console.log("showMain is working");
+    //event.preventDefault();
     header.style.display = "flex";
     intro.style.display = "none";
     main.style.display = "flex";
@@ -90,28 +103,29 @@ function showMain () {
     elemBtn4.textContent = quizOption4[0];
     elemRightWrong.textContent = ""; 
 
-    //reset timer
-    resetTimer();
+    resetScoresI(); //reset scores and I
+    resetTimer(); //reset timer
     //timer control
-    elemTimer.textContent = `Time left: ${timeLeft}s`;
     timer();
 };
 
 //check answers and next
 
 main.addEventListener("click",proceed);
-function proceed (event) {
+function proceed () {
+    //event.preventDefault();
     let element = event.target;
     //let id = element.getAttribute("data-id");
     if (element.dataset.id === quizAnswer[mainI]) {
         console.log("correct", yourScores);
         elemRightWrong.textContent = "Correct!"; 
+        timeDisplay = timeLeft;
         countdown = 0;
     } else if (!isNaN(element.dataset.id)) {
-        console.log("wrong", yourScores);
-        yourScores =- 10;
-        elemRightWrong.textContent = "Wrong!"; 
-        timeLeft = timeLeft - countdown;
+        yourScores -= 10;
+        console.log("incorrect", yourScores);
+        elemRightWrong.textContent = "Incorrect!"; 
+        timeLeft = timeDisplay;
         countdown = 0;
     };
     if (!isNaN(element.dataset.id)) {
@@ -125,7 +139,7 @@ function proceed (event) {
             elemBtn2.textContent = quizOption2[mainI];
             elemBtn3.textContent = quizOption3[mainI];
             elemBtn4.textContent = quizOption4[mainI];
-            timer();
+            //timer();
             };
     }
 };
@@ -141,25 +155,56 @@ function showSubmit () {
     main.style.display = "none";
     submit.style.display = "flex";
     highScores.style.display = "none";
+    document.querySelector(".finalScore").textContent = `Your final score is ${yourScores}`;
     document.getElementById("submit-rightwrong").textContent = elemRightWrong.textContent;
+    document.querySelector(".btn3").addEventListener("click", writeRecord);
+    function writeRecord (event) {
+        //console.log(`initials is ${initials.value}`);
+        event.preventDefault();
+        event.stopPropagation();
+        initials = document.querySelector(".initials").value;
+        recordName[recordNumber] = initials;
+        //document.querySelector(".initials").value = "";
+        recordScore[recordNumber] = yourScores;
+        recordNumber++;
+        //yourScores = 0;
+        //initials.value = "";
+        //console.log(`initials is ${initials.value}`);
+        showHighScores();
+    }
 };
-
-
 
 //load highScores
 function showHighScores () {
     //console.log("showHighscores is working");
+    //event.preventDefault();
+    clearInterval(timerInterval); // stop timer if still time left
+    resetTimer(); //reset timer
     header.style.display = "none";
     intro.style.display = "none";
     main.style.display = "none";
     submit.style.display = "none";
     highScores.style.display = "flex";
+    scoreBoard.setAttribute("rows", recordNumber);
+    console.log(recordNumber);
+    scoreBoard.value += recordName[recordNumber - 1] + ", " + recordScore[recordNumber - 1] + "\n";
+    /*for (i=0; i<recordNumber; i++) {
+        //scoreBoard.value = "test"; //recordName[i] + "," + recordScore[i]; 
+        console.log(i);
+        //console.log(`${recordName[i]}, ${recordScore[i]}, ${i}`);
+        scoreBoard.value += recordName[i] + ", " + recordScore[i];
+        /*if (i<recordScore.length) {
+            scoreBoard.value += "\n";
+        };
+    };*/
+    
+
 };
 
-const goBack = document.querySelector("#back");
-//TODO need to navigate to the previous page
+//go back from highscore
+let goBack = document.querySelector("#back");
 goBack.addEventListener("click",showIntro);
-const clear = document.querySelector("#clear");
+let clear = document.querySelector("#clear");
 //clear.addEventListener("click",)
 
 
