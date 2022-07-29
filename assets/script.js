@@ -5,6 +5,10 @@ let submit = document.querySelector(".submit");
 let highScores = document.querySelector(".highscores");
 let header = document.querySelector("header");
 
+//clear form
+let goBack = document.querySelector("#back");
+let clear = document.querySelector("#clear");
+
 //store Q&As
 const quizQuestions = ['Commonly used data types DO Not include:', 'Arrays in JavaScript can be used to store:', 'String values must be enclosed within _____ when being assigned to variables:', 'The condition in an if / else statement is enclosed with ______:', 'A very useful tool used during development and debugging for printing content to the debugger is:'];
 const quizOption1 = ['1. strings', '1. numbers and string', '1. commas', '1. quotes', '1. JavaScript'];
@@ -157,19 +161,6 @@ function showSubmit () {
     highScores.style.display = "none";
     document.querySelector(".finalScore").textContent = `Your final score is ${yourScores}`;
     document.getElementById("submit-rightwrong").textContent = elemRightWrong.textContent;
-    document.getElementById("btn3-submit").addEventListener("click", writeRecord);
-    function writeRecord () {
-        console.log(recordNumber, recordScore);
-        //console.log(`initials is ${initials.value}`);
-        //event.preventDefault();
-        //event.stopPropagation();
-        initials = document.querySelector(".initials").value;
-        recordScore.push(`${initials}, ${yourScores}`);
-        document.querySelector(".initials").value = "";
-        recordNumber += 1;
-        showHighScores();
-        console.log(recordNumber, recordScore);
-    };
 };
 
 //load highScores
@@ -183,25 +174,47 @@ function showHighScores () {
     main.style.display = "none";
     submit.style.display = "none";
     highScores.style.display = "flex";
-    scoreBoard.setAttribute("rows", recordNumber);
+    scoreBoard.setAttribute("rows", recordScore.length);
     scoreBoard.value = "";
     //console.log(recordNumber, recordName, recordScore);
     //scoreBoard.value += recordName[recordNumber - 1] + ", " + recordScore[recordNumber - 1] + "\n";
-    for (i=0; i<recordNumber; i++) {
-        console.log(recordNumber, recordScore);
+    for (i=0; i<recordScore.length; i++) {
+        //console.log(recordScore.length, recordScore);
         //scoreBoard.value = "test"; //recordName[i] + "," + recordScore[i]; 
         console.log(i);
-        console.log(recordNumber, recordScore);
-        scoreBoard.value += recordScore[i] + "\n";
-        console.log(recordNumber, recordScore);
+        //console.log(recordScore.length, recordScore);
+        var currentRecord = recordScore[i]
+        scoreBoard.value += `${currentRecord.initials}, ${currentRecord.score} \n`;
+        //console.log(recordScore.length, recordScore);
     };
-    console.log(recordNumber, recordScore);
+    console.log(recordScore.length, recordScore);
 };
 
+
+//submit button
+function writeRecord () {
+    //console.log(recordNumber, recordScore);
+    //console.log(`initials is ${initials.value}`);
+    //event.preventDefault();
+    //event.stopPropagation();
+    initials = document.querySelector(".initials").value;
+    var userScore = {
+        initials: initials,
+        score: yourScores
+    }
+    recordScore.push(userScore);
+    document.querySelector(".initials").value = "";
+    //recordNumber += 1;
+    showHighScores();
+    console.log(recordScore.length, recordScore);
+};
+
+document.getElementById("btn3-submit").addEventListener("click", writeRecord);
+
+
 //go back from highscore
-let goBack = document.querySelector("#back");
+
 goBack.addEventListener("click",showIntro);
-let clear = document.querySelector("#clear");
 clear.addEventListener("click",clearScores);
 function clearScores () {
     recordNumber = 0;
